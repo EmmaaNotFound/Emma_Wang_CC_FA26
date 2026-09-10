@@ -1,0 +1,15 @@
+.button {
+    border: dashed 2px #21a663;
+    background-color: #addeaf;
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.textbox {
+    border: 2px double rgb(119, 192, 172);
+    border-radius: 5px;
+    padding: 5px;
+}
