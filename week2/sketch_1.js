@@ -7,7 +7,7 @@ let x, y;
 
 // orbit system
 let angle;
-let orb_radius = 800;
+let orb_radius;
 let centerX;
 let centerY;
 
@@ -18,6 +18,7 @@ function setup () {
     // initialize orbit center
     centerX = windowWidth/2;
     centerY = windowHeight/1.8;
+    orb_radius = windowWidth/3.2;
 }
 
 function draw () {
