@@ -52,5 +52,4 @@ function swirl(x, y) {
 
     return createVector(xNew, yNew);
     
-
 }
