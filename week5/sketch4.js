@@ -1,0 +1,43 @@
+let rows = 12
+let cols = 12
+let boxes = [];
+
+function setup() {
+    createCanvas(windowWidth, windowHeight);
+    let index = 0
+
+    for(let x = 0; x < cols; x++){
+        for(let y = 0; y < rows; y++){
+            // create an array, 0 corresponding to every box on the grid
+            boxes[index] = 0;
+            index++; 
+        }
+    }
+    //print(boxes);
+}
+
+function draw() {
+    background(0);
+
+    let index = 0;
+
+    for(let x = 0; x < cols; x++) {
+        for(let y = 0; y < rows; y++) {
+            //stroke(255);
+            fill(0);
+
+            if(mouseX > x*(width/cols) && mouseX < (x+1)*(width/cols) && mouseY > y*(height/rows) && mouseY < (y+1)*(height/rows)) { // check if mouse if in between two vertival cols
+                // change the color if posses particular box
+                boxes[index] = 255;
+
+            }
+            fill(boxes[index], random(100), random(100));
+            //rect(x*(width/cols), y*(height/rows), width/cols, height/rows);
+            let n = index;
+            text(n, x*(width/cols), y*(height/rows))
+            boxes[index] *= 0.99;
+            index++;
+        }
+
+    }
+}
