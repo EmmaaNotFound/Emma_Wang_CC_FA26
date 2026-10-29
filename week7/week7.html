@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 7 - The Wheel of the Seasons</title>
+    <style>
+        body { font-family: sans-serif; max-width: 760px; margin: 2rem auto; padding: 0 1rem; line-height: 1.6; }
+        code { background: #eee; padding: 0 4px; border-radius: 3px; }
+        img, iframe { display: block; margin: 1rem auto; }
+    </style>
+</head>
+<body>
+    <a href="../index.html">← Back to portfolio</a>
+
+    <h1> Week 7: The Wheel of the Seasons </h1> 
+    <p> Group projection mapping project with Skyla, Sherin, and Yuxian. </p>
+
+    <h2> Project Overview </h2>
+    <p>
+        Our group projected the four seasons onto a stack of white boxes. There are eight surfaces,
+        so we deside each person coding one season on two surfaces: spring on 3-4, summer on 1-2, fall on 7-8, and winter on 5-6.
+        We shared one colors.json file so every season uses the same main colors, and each season's
+        edges blend into its neighbors' colors. We chose a particle as an object that represents each season. 
+        And we finally decided to make the particles in all four seasons move in one circular direction,
+        so the whole piece reads as a wheel of seasons turning.
+    </p>
+    <p>
+        I made fall season, on surface 7 (the top of the box) and surface 8 (the side).
+    </p>
+
+    <img src="thebox.JPG" alt="The stacked boxes for our projection mapping" width="400">
+
+    <h2> What I Made </h2>
+    <ul>
+        <li> Added vertical gradient that starts with summer's color at the top and moves through gold, orange, and rust to dark brown. </li>
+        <li> Added a soft winter glow coming in from the upper left edge, where my surface meets winter. </li>
+        <li> The falling leaves are in two shapes, oval and maple, that sway side to side and rock as they fall. </li>
+        <li> Created a pile of leaves on the ground. The color is darker toward the bottom to give it depth. Falling leaves fade when they reach the pile. </li>
+        <li> Most of them eventually gets blown away to the left side of the screen and connects to where the winter snow flake appears. </li>
+    </ul>
+
+    <h2> Functions and Techniques </h2>
+    <ul>
+        <li> Background: <code>createLinearGradient()</code>, <code>createRadialGradient()</code>, <code>addColorStop()</code> </li>
+        <li> Leaves: <code>class</code>, arrays, <code>beginShape()</code> / <code>vertex()</code>, <code>sin()</code> / <code>cos()</code> </li>
+        <li> Color and depth: <code>lerpColor()</code>, <code>map()</code> </li>
+        <li> Wind: <code>lerp()</code> with an quadratic function (<code> fallenFraction * fallenFraction </code>) so leaves get swept out faster near the bottom </li>
+        <li> Cleanup: <code>splice()</code> to remove leaves that fade or leave the screen </li>
+        <li> Projection mapping: <code>createGraphics()</code>, <code>image()</code>, <code>createQuadMap()</code>, <code>displayTexture()</code> </li>
+    </ul>
+
+    <h2> Progress </h2>
+
+    <h3> Draft 1 </h3>
+    <img src="mapping_org.png" alt="The mapping" width="400">
+    <p>
+        I set up my canvas using our shared colors file and drew the background gradient. Then I made a
+        leaf class and got oval leaves falling with a sway, using a fixed center line for each leaf
+        and sin() to swing around it, creating a sway effect.
+    </p>
+
+    <h3> Draft 2 </h3>
+    <p>
+        I made the canvas vertical and added the leaf pile at the bottom. Originally I was going to pile the leave 
+        with a for loop, a more complicated way, but then I realized I can just make them randomly generate within
+        a fixed rectangular area. I also added the fading of the fallen leaves, and the maple leaves.
+        The maple leaf is drawn as a star shape with tips and notches. I made the tips smaller near the stem in order to make it look more real.
+        After our group decided on the circular motion of our elements, I added wind effect that make most leaves fallen out of the left edge
+        into winter, and a winter glow on that edge so the two seasons blend.
+    </p>
+
+    <h2> Final Sketch </h2>
+    <iframe src="fall/index-fall-og.html" width="420" height="800" style="border: none;"></iframe>
+    <p>
+        After our first meeting, I fixed the draft to adapt to the circle of season idea (added the wind blow), and adopted the new summer and winter color.
+    </p>
+
+    <h3> Mapping </h3>
+    <img src="mapping_fall.png" alt="The mapping" width="400">
+    <p>
+        To map my animation onto two surfaces, I moved everything from setup() and draw()
+        into new function called initFall() and renderFall(pg) only for mapping purpose. so it draws into a 400 * 800 buffer instead of
+        the screen. I also kept the original version of my sketch as a back up. I used a separate mapping file cuts that buffer in half, 
+        so that later while projecting, the top half goes on surface 7 and the bottom half on surface 8. 
+        That way it's easier than adding extra shaping points on the whole canvas to fit it into two surface perpendicualr to each other. 
+        Both halves come from the same image, so a leaf leaving the bottom of surface 7 appears at the top of surface 8, so the animation stays continuous.
+    </p>
+
+    <h2> Challenges </h2>
+    <ul>
+        <li> <b>Mapping Script:</b> The mapping took a while to figure out. I referred to the class code, as well as our teammates code to grasp and idea of how the buffer works.</li>
+        <li> <b>Motion of Leaves:</b> I spent a lot of time figuring out how to use sine function to make the leave rock. Later I realized that there'll need to 
+             be a central x axis for each leave to rock back and forth on, and I could add a deviation factor to manipulate how strong it rocks, and also made it assymetrical and more random </li>
+        <li> <b>Color Mapping:</b> I had a hard time figuring out how to draw radient that fades into top left. Then Pinpin helped me understand how radial gradient works, which is a much simpler way of implementing our vision </li>
+    </ul>
+
+</body>
+</html>
